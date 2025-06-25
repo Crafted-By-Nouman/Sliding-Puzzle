@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brain Tiles - Where logic meets motion</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen active">
+      <div class="particles" id="particles-js"></div>
+      <div class="glass-card">
+        <div class="user-info">
+          <button id="change-username" class="glow-button">
+            <span id="display-username">Player</span>
+          </button>
+          <button id="reset-score" class="glow-button">
+            <span id="high-score">0 moves (00:00)</span>
+          </button>
+        </div>
+        <h1 class="neon-text">Brain Tiles</h1>
+        <p>
+          Challenge your mind with every slide<br />BrainTiles turns simple
+          movements into powerful mental victories.
+        </p>
+        <div class="button-group">
+          <button id="start-game" class="glow-button">
+            <i class="fas fa-gamepad"></i> Start Game
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Setup Screen -->
+    <div id="setup-screen" class="screen">
+      <div class="glass-card">
+        <h2>Select Difficulty</h2>
+        <div class="difficulty-options">
+          <button data-difficulty="3" class="difficulty-btn glow-button">
+            <i class="fas fa-seedling"></i> Easy (3×3)
+          </button>
+          <button data-difficulty="4" class="difficulty-btn glow-button">
+            <i class="fas fa-leaf"></i> Medium (4×4)
+          </button>
+          <button data-difficulty="5" class="difficulty-btn glow-button">
+            <i class="fas fa-tree"></i> Hard (5×5)
+          </button>
+        </div>
+        <button id="back-to-home" class="glow-button">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </button>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+      <div class="game-hud">
+        <div class="hud-item">
+          <i class="fas fa-clock"></i>
+          <span id="timer">00:00</span>
+        </div>
+        <div class="hud-item">
+          <i class="fas fa-arrows-alt"></i>
+          <span id="moves">0</span>
+        </div>
+        <div class="hud-item">
+          <i class="fas fa-pause"></i>
+          <span id="pause-btn">Pause</span>
+        </div>
+      </div>
+
+      <div id="puzzle-container"></div>
+
+      <div class="game-controls">
+        <button id="leave-game" class="glow-button">
+          <i class="fas fa-sign-out-alt"></i> Leave
+        </button>
+        <button id="restart-game" class="glow-button">
+          <i class="fas fa-redo"></i> Restart
+        </button>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over-screen" class="screen">
+      <div class="glass-card">
+        <div id="confetti-canvas"></div>
+        <h2 id="result-title">Puzzle Solved!</h2>
+        <div class="result-details">
+          <p>
+            <i class="fas fa-user"></i> <span id="result-username">Player</span>
+          </p>
+          <p>
+            <i class="fas fa-arrows-alt"></i> Moves:
+            <span id="result-moves">0</span>
+          </p>
+          <p>
+            <i class="fas fa-clock"></i> Time:
+            <span id="result-time">00:00</span>
+          </p>
+          <p>
+            <i class="fas fa-layer-group"></i> Difficulty:
+            <span id="result-difficulty">Easy</span>
+          </p>
+        </div>
+        <div id="high-score-badge" class="hidden">
+          <i class="fas fa-trophy"></i> New High Score!
+        </div>
+        <div class="button-group">
+          <button id="play-again" class="glow-button">
+            <i class="fas fa-redo"></i> Play Again
+          </button>
+          <button id="share-result" class="glow-button">
+            <i class="fas fa-share-alt"></i> Share
+          </button>
+          <button id="return-home" class="glow-button">
+            <i class="fas fa-home"></i> Home
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Username Modal -->
+    <div id="username-modal" class="modal">
+      <div class="modal-content glass-card">
+        <h2>Welcome to Neon Slide!</h2>
+        <p>Enter your name to begin:</p>
+        <input
+          type="text"
+          id="username-input"
+          placeholder="Your name"
+          maxlength="20" />
+        <button id="save-username" class="glow-button">
+          <i class="fas fa-save"></i> Save & Play
+        </button>
+      </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div id="pause-modal" class="modal hidden">
+      <div class="modal-content glass-card">
+        <h2>Game Paused</h2>
+        <div class="pause-stats">
+          <p>Moves: <span id="pause-moves">0</span></p>
+          <p>Time: <span id="pause-time">00:00</span></p>
+        </div>
+        <button id="resume-game" class="glow-button">
+          <i class="fas fa-play"></i> Resume
+        </button>
+        <button id="quit-game" class="glow-button">
+          <i class="fas fa-sign-out-alt"></i> Quit
+        </button>
+      </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal hidden">
+      <div class="modal-content glass-card">
+        <h2>Share Your Achievement</h2>
+        <div class="share-options">
+          <button id="copy-link" class="glow-button">
+            <i class="fas fa-copy"></i> Copy Link
+          </button>
+          <button id="share-twitter" class="glow-button">
+            <i class="fab fa-twitter"></i> Twitter
+          </button>
+          <button id="share-facebook" class="glow-button">
+            <i class="fab fa-facebook"></i> Facebook
+          </button>
+        </div>
+        <button id="close-share" class="glow-button">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
