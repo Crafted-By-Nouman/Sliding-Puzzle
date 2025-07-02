@@ -25,7 +25,7 @@
 body {
   background: linear-gradient(135deg, var(--dark-color), #16213e);
   color: var(--text-primary);
-  height: 100vh;
+  height: 100svh;
   overflow-x: hidden;
 }
 
